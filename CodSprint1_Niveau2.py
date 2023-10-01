@@ -94,11 +94,12 @@ def Boucle_calc_mental_addition2():
 
 def Difficulte_bcma():
     """
-        bcma : Boucle_calc_mental_additio
+        bcma : Boucle_calc_mental_addition
         
         Demander d’entrer un entier d compris entre 0 et 4 a l'utilisateur.
     S’il saisit d entre 1 et 4, vous lui demander des additions de nombres de
-    d chiffres exactement.
+    d chiffres exactement. Et s'il saisi 0 ce sera un nombre d de chiffre
+    aléatoire.
     """
     #Boucle  while qui demande le choix de la difficulté entre 0 et 4
     choix_invalide = True
@@ -144,5 +145,73 @@ def Difficulte_bcma():
 ### 1.2 Choix d’un niveau de difficulte ###
 
 #Difficulte_bcma()
+
+### Decommenter pour tester les fonctions ! ###
+
+
+
+def Complexite_dbcma():
+    """
+        dbcma : Difficulte_boucle_calc_mental_addition
+        
+        Demander d’entrer un entier d compris entre 0 et 4 a l'utilisateur.
+    S’il saisit 1, on lui fait faire des additions, s’il saisit 2, 3 ou 4, on lui fait
+    faire respectivement des soustractions, des multiplications et des divisions.
+    S’il saisit 0, le programme decide aleatoirement a chaque question le type
+    d’operation a resoudre.
+    """
+    #On ajoute le choix de la complexite dans la boucle
+    choix_invalide = True
+    while choix_invalide:
+        choix_difficulte = int(input("De quel difficulte souhaites-tu que tes calculs soit entre 0 et 4 : "))
+        choix_complexite = int(input("De quel complexite souhaites-tu que tes calculs soit entre 0 et 4 : "))
+        
+        if (choix_difficulte >=0 and choix_difficulte <5) and (choix_complexite >=0 and choix_complexite <5): choix_invalide = False
+        
+    difficulte0 = [10, 100, 1000, 10000]
+    complexite = ["+", "-", "*", "/"]
+    compteur = 0
+    nombre_calcul = int(input("Combien d'opération veux-tu faire ? "))
+    
+    for i in range(nombre_calcul):
+        difficulte = [difficulte0[r.randint(0,3)], 10, 100, 1000, 10000]
+        nb_1, nb_2 = r.randint(1, difficulte[choix_difficulte]-1), r.randint(1, difficulte[choix_difficulte]-1)   
+        
+        #On fait les différents calculs
+        somme, soustraction = nb_1 + nb_2, nb_1 - nb_2 
+        multiplication, division = nb_1 * nb_2, nb_1 / nb_2
+        Calcul0 = [somme, soustraction, multiplication, division]
+        random_complexite = r.randint(0,3)
+        
+        #Liste des opérations pour la question et liste des calculs pour celui que l'utilisateur a choisi
+        Operation = [complexite[random_complexite], "+", "-", "*", "/"]
+        Calcul = [Calcul0[random_complexite], somme, soustraction, multiplication, division]
+        
+        réponse = int(input(f"\nOperation {i+1} sur {nombre_calcul} : {nb_1} {Operation[choix_complexite]} {nb_2} = "))
+        
+        if Calcul[choix_complexite] == réponse:
+            print(f"Bravo ! la reponse etait bien {réponse}")
+            compteur += 1
+        else:
+            print(f"Oh non... Tu t'es trompe, la reponse etait : {Calcul[choix_complexite]}")
+    
+    pourcentage_reponse = round(compteur * 100 / nombre_calcul,2)
+    
+    if pourcentage_reponse == 100:
+        print("\nParfait ! 100% de bonne reponse !")
+    elif pourcentage_reponse < 30:
+        print(f"\nRetourne a l’ecole ! Tu n'as fais que {pourcentage_reponse}% de bonne reponse")
+    elif pourcentage_reponse < 60: 
+        print(f"\nDes progres sont necessaires. Ton pourcentage de bonne reponse est de {pourcentage_reponse}%")
+    elif pourcentage_reponse < 90:
+        print(f"\nBons resultats. Tu as reussi {pourcentage_reponse}% des calculs.")
+    else:
+        print(f"\nCalculateur hors pair ! {pourcentage_reponse}% de tes calculs sont juste !")
+        
+        
+        
+### 1.3 Choix d’un niveau de complexite ###
+
+#Complexite_dbcma()
 
 ### Decommenter pour tester les fonctions ! ###
